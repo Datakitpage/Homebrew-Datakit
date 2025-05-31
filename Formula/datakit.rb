@@ -9,14 +9,14 @@ class Datakit < Formula
     depends_on "node"
   
     def install
-        system "npm", "install", *std_npm_args(libexec)
+        system "npm", "install", *std_npm_args
         bin.install_symlink Dir["#{libexec}/bin/*"]
       end
     
       test do
         # Test that the command exists and shows version
         output = shell_output("#{bin}/datakit --version 2>&1")
-        assert_match "0.1.0", output
+        assert_match version.to_s, output
         
         # Test that help works
         help_output = shell_output("#{bin}/datakit --help 2>&1")
